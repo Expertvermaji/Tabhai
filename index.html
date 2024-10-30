@@ -1,0 +1,136 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hacker Interface</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: black;
+            color: lime;
+            font-family: monospace;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        .box-container {
+            display: flex;
+            gap: 20px; /* Space between boxes */
+            margin-bottom: 20px; /* Space between boxes and button */
+        }
+
+        .box {
+            width: 150px;
+            height: 150px;
+            border: 2px solid lime;
+            border-radius: 8px;
+            box-shadow: 0 0 15px lime;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: lime;
+            background-color: black;
+            border: 2px solid lime;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        button:hover {
+            background-color: lime;
+            color: black;
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 3em;
+            }
+        }
+
+        /* Instruction box style */
+        #instruction-box {
+            display: none; /* Hidden by default */
+            border: 2px solid lime;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 20px;
+            width: 400px; /* Width of instruction box */
+            text-align: center;
+            font-size: 1.5em;
+            overflow: hidden; /* Prevent overflow */
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">RAJ-XNETWORK</h1>
+
+    <!-- Container for two boxes -->
+    <div class="box-container">
+        <div class="box" id="timer-box">30</div> <!-- First box with timer -->
+        <div class="box" id="sequence-box">Hacking Server by Raj...</div> <!-- Second box for sequence display -->
+    </div>
+
+    <!-- Button below the boxes -->
+    <button onclick="showInstructions()">Click Me</button>
+
+    <!-- Instruction box -->
+    <div id="instruction-box"></div>
+
+    <script>
+        const colors = ["lime", "cyan", "red", "yellow", "magenta"];
+        let index = 0;
+
+        function changeColor() {
+            document.getElementById("title").style.color = colors[index];
+            index = (index + 1) % colors.length;
+        }
+
+        setInterval(changeColor, 1000);
+
+        // Timer logic
+        let timerValue = 30; // Start from 30 seconds
+        const timerBox = document.getElementById("timer-box");
+        const sequenceBox = document.getElementById("sequence-box");
+        const instructionBox = document.getElementById("instruction-box");
+        const sequence = ["BIG", "RED", "SMALL", "BIG", "BIG", "SMALL", "SMALL", "BIG", "SMALL", "SMALL", 
+                          "BIG", "BIG", "SMALL", "BIG", "GREEN", "SMALL", "BIG", "SMALL", "BIG", "BIG", 
+                          "BIG", "SMALL", "SMALL", "SMALL", "BIG", "BIG", "SMALL", "SMALL", "BIG", 
+                          "SMALL", "BIG", "SMALL", "BIG", "BIG", "SMALL", "SMALL"];
+        let sequenceIndex = 0;
+
+        function updateTimer() {
+            timerBox.textContent = timerValue;
+            timerValue--;
+
+            if (timerValue < 0) {
+                timerValue = 30; // Reset to 30 seconds when it reaches 0
+
+                // Update sequence box with next item in sequence
+                if (sequenceIndex < sequence.length) {
+                    sequenceBox.textContent = sequence[sequenceIndex];
+                    sequenceIndex++;
+                }
+            }
+        }
+
+        function showInstructions() {
+            instructionBox.style.display = 'block'; // Show instruction box
+            instructionBox.textContent = "Raj Bhai Ke Aage Koi Bol Sakta Hai Ka"; // Set instruction text
+        }
+
+        setInterval(updateTimer, 1000); // Update timer every second
+    </script>
+</body>
+</html>
